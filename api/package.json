@@ -1,0 +1,21 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "api",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --harmony-top-level-await index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "repository": {},
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "rest-on-mongo": "^2.4.0",
+    "swagger-ui-express": "^4.1.5",
+    "yamljs": "^0.3.0"
+  }
+}

@@ -1,0 +1,200 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "API"
+host: "127.0.0.1:32323"
+basePath: "/api/v1"
+schemes:
+- "http"
+paths:
+  /resource:
+    get:
+      tags:
+      - "resource"
+      summary: "List resources"
+      operationId: "listResources"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "__limit"
+        in: "query"
+        description: "The number of results to return"
+        type: "integer"
+      - name: "__skip"
+        in: "query"
+        description: "The number of results to skip"
+        type: "integer"
+      responses:
+        "200":
+          description: "Ok"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Resource"
+    post:
+      tags:
+      - "resource"
+      summary: "Create a resource"
+      operationId: "createResource"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Resource object"
+        required: true
+        schema:
+          $ref: "#/definitions/Resource"
+      responses:
+        "200":
+          description: "Ok"
+    put:
+      tags:
+      - "resource"
+      summary: "Update resources"
+      operationId: "updateResources"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Resource objects"
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/Resource"
+      responses:
+        "200":
+          description: "Ok"      
+  /resource/{_id}:
+    get:
+      tags:
+      - "resource"
+      summary: "Read a resource"
+      operationId: "readResource"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "Id of resource"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "ok"
+          schema:
+            $ref: "#/definitions/Resource"
+        "404":
+          description: "Not found"
+    put:
+      tags:
+      - "resource"
+      summary: "Update a resource"
+      operationId: "updateResource"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "Id of resource"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Resource object"
+        required: true
+        schema:
+          $ref: "#/definitions/Resource"
+      responses:
+        "200":
+          description: "Ok"
+    delete:
+      tags:
+      - "resource"
+      summary: "Delete a resource"
+      operationId: "deleteResource"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "Id of resource"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Ok"
+
+    get:
+      tags:
+      - "task"
+      summary: "Read a resource"
+      operationId: "readTask"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "Id of resource"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "ok"
+          schema:
+            $ref: "#/definitions/Task"
+        "404":
+          description: "Not found"
+    put:
+      tags:
+      - "task"
+      summary: "Update a resource"
+      operationId: "updateTask"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "Id of resource"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Resource object"
+        required: true
+        schema:
+          $ref: "#/definitions/Task"
+      responses:
+        "200":
+          description: "Ok"
+    delete:
+      tags:
+      - "task"
+      summary: "Delete a resource"
+      operationId: "deleteTask"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "Id of resource"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Ok"
+definitions:
+  Resource:
+    type: "object"

@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  # mongo
+  mongo:
+    image: 'mongo:${MONGO_TAG}'
+    hostname: mongo
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+    volumes:
+      - vol_mongo_data:/data/db
+    networks: 
+      - net_api
+  # api
+  api:
+    build: .
+    hostname: api
+    env_file: ./api/.env
+    environment: 
+      - SERVER=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo
+      - DB=${MONGO_DB}
+    ports: 
+      - ${API_PORT}:8008
+    volumes:
+      - ./api/swagger.yaml:/usr/src/app/apijs/swagger.yaml
+    networks: 
+      - net_api
+
+networks:
+  net_api:
+    name: net_api
+    driver: bridge
+
+volumes:
+  vol_mongo_data:
