@@ -134,32 +134,98 @@ paths:
       responses:
         "200":
           description: "Ok"
-
+  /campaign:
     get:
       tags:
-      - "task"
-      summary: "Read a resource"
-      operationId: "readTask"
+      - "campaign"
+      summary: "List Campaign"
+      operationId: "listCampaign"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "__limit"
+        in: "query"
+        description: "The number of results to return"
+        type: "integer"
+      - name: "__skip"
+        in: "query"
+        description: "The number of results to skip"
+        type: "integer"
+      responses:
+        "200":
+          description: "Ok"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Campaign"
+    post:
+      tags:
+      - "campaign"
+      summary: "Create a Campaign"
+      operationId: "createCampaign"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Campaign object"
+        required: true
+        schema:
+          $ref: "#/definitions/Campaign"
+      responses:
+        "200":
+          description: "Ok"
+    put:
+      tags:
+      - "campaign"
+      summary: "Update Campaign"
+      operationId: "updateCampaign"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Campaign objects"
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/Campaign"
+      responses:
+        "200":
+          description: "Ok"  
+  /campaign/{_id}:
+    get:
+      tags:
+      - "campaign"
+      summary: "Read a Campaign"
+      operationId: "readCampaign"
       produces:
       - "application/json"
       parameters:
       - name: "_id"
         in: "path"
-        description: "Id of resource"
+        description: "Id of Campaign"
         required: true
         type: "string"
       responses:
         "200":
           description: "ok"
           schema:
-            $ref: "#/definitions/Task"
+            $ref: "#/definitions/Campaign"
         "404":
           description: "Not found"
     put:
       tags:
-      - "task"
-      summary: "Update a resource"
-      operationId: "updateTask"
+      - "campaign"
+      summary: "Update a Campaign"
+      operationId: "updateCampaign"
       consumes:
       - "application/json"
       produces:
@@ -167,29 +233,29 @@ paths:
       parameters:
       - name: "_id"
         in: "path"
-        description: "Id of resource"
+        description: "Id of Campaign"
         required: true
         type: "string"
       - in: "body"
         name: "body"
-        description: "Resource object"
+        description: "Campaign object"
         required: true
         schema:
-          $ref: "#/definitions/Task"
+          $ref: "#/definitions/Campaign"
       responses:
         "200":
           description: "Ok"
     delete:
       tags:
-      - "task"
-      summary: "Delete a resource"
-      operationId: "deleteTask"
+      - "campaign"
+      summary: "Delete a Campaign"
+      operationId: "deleteCampaign"
       produces:
       - "application/json"
       parameters:
       - name: "_id"
         in: "path"
-        description: "Id of resource"
+        description: "Id of Campaign"
         required: true
         type: "string"
       responses:
@@ -197,4 +263,6 @@ paths:
           description: "Ok"
 definitions:
   Resource:
+    type: "object"
+  Campaign:
     type: "object"
