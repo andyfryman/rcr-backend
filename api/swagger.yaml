@@ -261,8 +261,82 @@ paths:
       responses:
         "200":
           description: "Ok"
+  /proccess:
+    get:
+      tags:
+      - "process"
+      summary: "List Process"
+      operationId: "listProcess"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "__limit"
+        in: "query"
+        description: "The number of results to return"
+        type: "integer"
+      - name: "__skip"
+        in: "query"
+        description: "The number of results to skip"
+        type: "integer"
+      responses:
+        "200":
+          description: "Ok"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Process"
 definitions:
   Resource:
     type: "object"
   Campaign:
     type: "object"
+    properties:
+      name: 
+        type: "string"
+        description: "The campaign name"
+      query:
+        type: "string"
+        description: "The original query"
+      resources:
+        type: "array"
+        description: "The list of resource id's"
+        items:
+          type: "string"
+      owner:
+        type: "string"
+        description: "The unique id of the campaign owner"
+      excluded:
+        type: "array"
+        description: "The list of excluded resource id's"
+        items:
+          type: "string"
+  Process:
+    type: "object"
+    description: "The structure that represents the campaign process"
+    properties:
+      campaign:
+        type: "string"
+        description: "The campaign id"
+      requests:
+        type: "array"
+        description: "The list of friend requests"
+        items:
+          type: "string"
+      friends:
+        type: "array"
+        description: "The list of friends"
+        items:
+          type: "string"
+      chats:
+        type: "array"
+        description: "The list of chats"
+        items:
+          type: "string"
+      candidates:
+        type: "array"
+        description: "The list of candidates"
+        items:
+          type: "string"   
+      
