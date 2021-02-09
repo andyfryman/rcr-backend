@@ -24,9 +24,7 @@ services:
       - SERVER=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo
       - DB=${MONGO_DB}
     ports: 
-      - ${API_PORT}:8008
-    volumes:
-      - ./api/swagger.yaml:/usr/src/app/apijs/swagger.yaml
+      - ${API_PORT}:${API_PORT_INTERNAL}
     networks: 
       - net_api
 
