@@ -3,14 +3,11 @@ version: '2.4'
 services:
   # mongo
   mongo:
-    image: 'mongo:${MONGO_TAG}'
+    image: 'mongo:4.4'
     hostname: mongo
     restart: unless-stopped
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
     ports:
-      - ${MONGO_PORT}:${MONGO_PORT}
+      - 27017:27017
     volumes:
       - vol_mongo_data:/data/db
     networks: 
@@ -21,10 +18,10 @@ services:
     hostname: api
     env_file: ./api/.env
     environment: 
-      - SERVER=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo
-      - DB=${MONGO_DB}
+      - SERVER=mongodb://mongo
+      - DB=api_db
     ports: 
-      - ${API_PORT}:${API_PORT_INTERNAL}
+      - 32323:32323
     networks: 
       - net_api
 
